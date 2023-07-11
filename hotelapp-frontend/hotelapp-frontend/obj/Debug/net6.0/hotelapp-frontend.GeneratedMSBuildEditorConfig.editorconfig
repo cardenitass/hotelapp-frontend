@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\David\Desktop\Github\hotelapp-frontend\hotelapp-frontend\hotelapp-frontend
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/David/Desktop/Github/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/About/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcQ29udGFjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/David/Desktop/Github/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/About/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
