@@ -1,7 +1,14 @@
+using hotelapp_frontend.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<HotelAppContext>(opciones =>
+        opciones.UseSqlServer(builder.Configuration.GetConnectionString("HotelAppContext")));
+
+
 
 var app = builder.Build();
 
