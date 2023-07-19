@@ -247,3 +247,4 @@ C:\Users\David\Desktop\Github\hotelapp-frontend\hotelapp-frontend\hotelapp-front
 C:\Users\David\Desktop\Github\hotelapp-frontend\hotelapp-frontend\hotelapp-frontend\obj\Debug\net6.0\hotelapp-frontend.pdb
 C:\Users\David\Desktop\Github\hotelapp-frontend\hotelapp-frontend\hotelapp-frontend\obj\Debug\net6.0\hotelapp-frontend.genruntimeconfig.cache
 C:\Users\David\Desktop\Github\hotelapp-frontend\hotelapp-frontend\hotelapp-frontend\obj\Debug\net6.0\ref\hotelapp-frontend.dll
+C:\Users\David\Desktop\Github\hotelapp-frontend\hotelapp-frontend\hotelapp-frontend\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout_Login.cshtml.rz.scp.css
