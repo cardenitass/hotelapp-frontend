@@ -1,0 +1,56 @@
+﻿@model IEnumerable<hotelapp_frontend.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Lista de Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Usuarios</h2>
+
+@if (!Model.Any())
+{
+    <p>Sin usuarios encontrados.</p>
+}
+else
+{
+    <section class="rooms-section spad">
+        <div class="container">
+            <div class="row">
+                @foreach (var usuario in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="room-item">
+                            <div class="ri-text">
+                                <h4>@usuario.Nombre</h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="r-o">Fecha de Nacimiento:</td>
+                                            <td>@usuario.FechaNacimiento.ToShortDateString()</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Correo:</td>
+                                            <td>@usuario.Correo</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Estado:</td>
+                                            <td>@(usuario.Estado ? "Activo" : "Inactivo")</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">ID de Rol:</td>
+                                            <td>@usuario.IDRol</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <a href="@Url.Action("Crear", "User")" class="primary-btn">Crear</a>
+                                <a href="@Url.Action("Detalle", "User", new { id = usuario.IDUsuario })" class="primary-btn">Detalles</a>
+                                <a href="@Url.Action("Editar", "User", new { id = usuario.IDUsuario })" class="primary-btn">Editar</a>
+                                <a href="@Url.Action("Eliminar", "User", new { id = usuario.IDUsuario })" class="primary-btn">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

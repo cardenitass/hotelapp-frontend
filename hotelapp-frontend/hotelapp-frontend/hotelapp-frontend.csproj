@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Caso1Context.cs" />
+    <Compile Remove="Models\hotelapp_frontendContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Room\RoomDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

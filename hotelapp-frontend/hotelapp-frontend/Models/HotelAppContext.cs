@@ -12,7 +12,10 @@ namespace hotelapp_frontend.Models
         }
 
         // Tablas 
+        public DbSet<Habitacion> Habitacion { get; set; }
+        public DbSet<TipoHabitacion> TipoHabitacion { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Rol> Roles { get; set; }
 
-        //public DbSet<Tarea> Tarea { get; set; }
     }
 }

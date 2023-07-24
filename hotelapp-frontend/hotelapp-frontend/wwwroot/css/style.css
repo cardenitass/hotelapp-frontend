@@ -142,7 +142,46 @@ ul, ol {
 	background: #dfa974;
 	content: "";
 }
+
+.create-btn {
+	background-color: #2ecc71; /* Un color verde más oscuro */
+	color: #fff;
+	padding: 12px 20px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+}
+
+	.create-btn:hover {
+		background-color: #27ae60; /* Color verde más claro al pasar el mouse */
+	}
+.modify-btn {
+	background-color: #089EF9; /* Un color azul más oscuro */
+	color: #fff;
+	padding: 12px 20px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+}
+
+	.modify-btn:hover {
+		background-color: #80CFFF; /* Color azul más claro al pasar el mouse */
+	}
 /* Preloder */
+
+/*Checkbox*/
+
+.question-label {
+	display: inline-block;
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+
 
 #preloder {
 	position: fixed;

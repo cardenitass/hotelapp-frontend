@@ -1,0 +1,39 @@
+﻿@model IEnumerable<hotelapp_frontend.Models.TipoHabitacion>
+
+
+@{
+    ViewData["Title"] = "Rooms Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            @foreach (var habitacion in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-item">
+                        <img src="@habitacion.Path_Img" alt="">
+                        <div class="ri-text">
+                            <h4>@habitacion.NombreTipoHabitacion</h4>
+                            <h3>@habitacion.CostoNoche<span> /Colones</span></h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Capacitidad:</td>
+                                        <td>Max persion @habitacion.CantPersonas</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="@Url.Action("Crear", "TipoHabitacion")" class="primary-btn">Crear</a>
+                            <a href="@Url.Action("Detalle", "TipoHabitacion", new { id = habitacion.IDTipoHabitacion })" class="primary-btn">Ver Details</a>
+                            <a href="@Url.Action("Editar", "TipoHabitacion", new { id = habitacion.IDTipoHabitacion })" class="primary-btn">Editar</a>
+                            <a href="@Url.Action("Eliminar", "TipoHabitacion", new { id = habitacion.IDTipoHabitacion })" class="primary-btn">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
