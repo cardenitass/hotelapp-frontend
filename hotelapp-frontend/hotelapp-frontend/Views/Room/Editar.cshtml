@@ -1,20 +1,14 @@
 ﻿@model hotelapp_frontend.Models.Habitacion
-@{
-    ViewData["Title"] = "Editar Habitacion";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<link rel="stylesheet" href="~/css/style.css" type="text/css" asp-append-version="true">
 
 <section class="rooms-section spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <h2>Editar Habitacion</h2>
+                    <h2>Edit</h2>
                     <div class="bt-option">
-                        <a asp-area="" asp-controller="Room" asp-action="Index">Habitaciones</a>
-                        <span>Editar Habitacion</span>
+                        <a asp-area="" asp-controller="Room" asp-action="Index">Room</a>
+                        <span>Edit</span>
                     </div>
                 </div>
             </div>
@@ -22,30 +16,42 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <form asp-action="Editar" method="post">
+                    <input type="hidden" asp-for="IDHabitacion" />
                     <div class="ri-text">
+                        <br/>
+                        <h4>Details</h4>
+                        <br />
                         <div class="form-group">
-                            <label asp-for="IDTipoHabitacion">Tipo de Habitación:</label>
-                            <select asp-for="IDTipoHabitacion" class="form-control" required>
-                                <option value="">Seleccione un Tipo de Habitación...</option>
-                                @foreach (var tipoHabitacion in ViewBag.TipoHabitacion)
-                                {
-                                    <option value="@tipoHabitacion.IDTipoHabitacion">@tipoHabitacion.NombreTipoHabitacion</option>
-                                }
-                            </select>
-                            <span asp-validation-for="IDTipoHabitacion" class="text-danger"></span>
+                            <label for="NombreHabitacion">Name:</label>
+                            <input type="text" id="NombreHabitacion" name="NombreHabitacion" class="form-control" asp-for="NombreHabitacion" required>
                         </div>
                         <div class="form-group">
-                            <label asp-for="NumeroPiso">Número de Piso:</label>
-                            <input asp-for="NumeroPiso" class="form-control" required>
-                            <span asp-validation-for="NumeroPiso" class="text-danger"></span>
+                            <label for="Descripcion">Description:</label>
+                            <textarea id="Descripcion" name="Descripcion" class="form-control" asp-for="Descripcion" maxlength="500" required>@Model.Descripcion</textarea>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Disponible" class="form-check-label">Disponible:</label>
+                            <label for="Path_Img">Image URL:</label>
+                            <input type="text" id="Path_Img" name="Path_Img" class="form-control" asp-for="Path_Img" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="CantPersonas">Capacity:</label>
+                            <input type="number" id="CantPersonas" name="CantPersonas" class="form-control" asp-for="CantPersonas" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="CantCamas">Number of Beds:</label>
+                            <input type="number" id="CantCamas" name="CantCamas" class="form-control" asp-for="CantCamas" required>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Disponible" class="form-check-label">Available:</label>
                             <div class="form-check form-check-inline">
                                 <input asp-for="Disponible" type="checkbox" class="form-check-input">
                             </div>
                         </div>
-                        <button type="submit" class="modify-btn">Guardar Cambios</button>
+                        <div class="form-group">
+                            <label for="CostoNoche">Cost Per Night:</label>
+                            <input type="number" id="CostoNoche" name="CostoNoche" class="form-control" asp-for="CostoNoche" required>
+                        </div>
+                        <button type="submit" class="modify-btn">Save</button>
                     </div>
                 </form>
             </div>

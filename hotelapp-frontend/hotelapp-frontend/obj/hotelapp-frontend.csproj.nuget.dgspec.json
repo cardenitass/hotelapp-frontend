@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Web\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend.csproj": {}
+    "C:\\Users\\David\\Desktop\\Github\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend.csproj": {}
   },
   "projects": {
-    "C:\\Web\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend.csproj": {
+    "C:\\Users\\David\\Desktop\\Github\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Web\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend.csproj",
+        "projectUniqueName": "C:\\Users\\David\\Desktop\\Github\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend.csproj",
         "projectName": "hotelapp-frontend",
-        "projectPath": "C:\\Web\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend.csproj",
-        "packagesPath": "C:\\Users\\Freydel Treminio\\.nuget\\packages\\",
-        "outputPath": "C:\\Web\\hotelapp-frontend\\hotelapp-frontend\\obj\\",
+        "projectPath": "C:\\Users\\David\\Desktop\\Github\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\David\\Desktop\\Github\\hotelapp-frontend\\hotelapp-frontend\\hotelapp-frontend\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Freydel Treminio\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -85,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

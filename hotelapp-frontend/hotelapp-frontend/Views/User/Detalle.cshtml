@@ -11,10 +11,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <h2>Detalles de Usuario</h2>
+                    <h2>User Details</h2>
                     <div class="bt-option">
-                        <a asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
-                        <span>Detalles de Usuario</span>
+                        <a asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                        <span>User Details</span>
                     </div>
                 </div>
             </div>
@@ -23,29 +23,25 @@
             <div class="col-lg-6 offset-lg-3">
                 <div class="ri-text">
                     <div class="form-group">
-                        <label asp-for="Nombre">Nombre:</label>
+                        <label asp-for="Nombre">Name:</label>
                         <input asp-for="Nombre" class="form-control" readonly>
                     </div>
                     <div class="form-group">
-                        <label asp-for="FechaNacimiento">Fecha de Nacimiento:</label>
+                        <label asp-for="FechaNacimiento">Birthdate:</label>
                         <input asp-for="FechaNacimiento" type="date" class="form-control" readonly>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Correo">Correo:</label>
+                        <label asp-for="Correo">Email:</label>
                         <input asp-for="Correo" class="form-control" readonly>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Contrasena">Contraseña:</label>
-                        <input asp-for="Contrasena" type="password" class="form-control" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Estado" class="form-check-label">Estado</label>
+                        <label asp-for="Estado" class="form-check-label">State</label>
                         <div class="form-check form-check-inline">
                             <input asp-for="Estado" type="checkbox" class="form-check-input" disabled>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Rol:</label>
+                        <label>Role:</label>
                         <span>@ViewBag.NombreRol</span>
                     </div>
                 </div>

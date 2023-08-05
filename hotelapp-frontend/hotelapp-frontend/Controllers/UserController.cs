@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
+using System;
+using System.Threading.Tasks;
 
 namespace hotelapp_frontend.Controllers
 {
@@ -15,27 +16,26 @@ namespace hotelapp_frontend.Controllers
             _context = context;
         }
 
+        // Trabajar Metodos de Login
+
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuarios.ToListAsync());
+            var usuarios = await _context.Usuarios.ToListAsync();
+            return View(usuarios);
         }
 
         [HttpGet]
         public IActionResult Crear()
         {
-            var roles = _context.Roles.ToList();
-            ViewBag.RolesList = new SelectList(roles, "IDRol", "NombreRol");
+            ViewBag.RolesList = new SelectList(_context.Roles, "IDRol", "NombreRol");
             return View();
         }
-
-        
 
         [HttpPost]
         public async Task<IActionResult> Crear(Usuario usuario)
@@ -44,21 +44,21 @@ namespace hotelapp_frontend.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    usuario.Estado = true;
                     _context.Usuarios.Add(usuario);
                     await _context.SaveChangesAsync();
-
                     return RedirectToAction(nameof(Index));
                 }
-                else
-                {
-                    return View(usuario);
-                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View(usuario);
+                ModelState.AddModelError(string.Empty, "Error al crear el usuario: " + ex.Message);
             }
+
+            ViewBag.RolesList = new SelectList(_context.Roles, "IDRol", "NombreRol");
+            return View(usuario);
         }
+
         [HttpGet]
         public async Task<IActionResult> Editar(int? id)
         {
@@ -73,8 +73,7 @@ namespace hotelapp_frontend.Controllers
                 return NotFound();
             }
 
-            var rolesList = _context.Roles.ToList();
-            ViewBag.RolesList = new SelectList(rolesList, "IDRol", "NombreRol");
+            ViewBag.RolesList = new SelectList(_context.Roles, "IDRol", "NombreRol");
             return View(usuario);
         }
 
@@ -85,41 +84,19 @@ namespace hotelapp_frontend.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var usuarioExistente = await _context.Usuarios.FindAsync(usuario.IDUsuario);
-                    if (usuarioExistente == null)
-                    {
-                        return NotFound();
-                    }
-
-                    // Actualizar las propiedades del usuario existente con los nuevos valores del formulario
-                    usuarioExistente.Nombre = usuario.Nombre;
-                    usuarioExistente.FechaNacimiento = usuario.FechaNacimiento;
-                    usuarioExistente.Correo = usuario.Correo;
-                    usuarioExistente.Contrasena = usuario.Contrasena;
-                    usuarioExistente.Estado = usuario.Estado;
-                    usuarioExistente.IDRol = usuario.IDRol;
-
-                    _context.Usuarios.Update(usuarioExistente);
+                    _context.Attach(usuario).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
-
                     return RedirectToAction(nameof(Index));
                 }
-                else
-                {
-                    var rolesList = _context.Roles.ToList();
-                    ViewBag.RolesList = new SelectList(rolesList, "IDRol", "NombreRol");
-                    return View(usuario);
-                }
             }
-            catch
+            catch (Exception ex)
             {
-                var rolesList = _context.Roles.ToList();
-                ViewBag.RolesList = new SelectList(rolesList, "IDRol", "NombreRol");
-                return View(usuario);
+                ModelState.AddModelError(string.Empty, "Error al guardar los cambios: " + ex.Message);
             }
+
+            ViewBag.RolesList = new SelectList(_context.Roles, "IDRol", "NombreRol");
+            return View(usuario);
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> Detalle(int? id)
@@ -134,6 +111,7 @@ namespace hotelapp_frontend.Controllers
             {
                 return NotFound();
             }
+
             var rol = await _context.Roles.FindAsync(usuario.IDRol);
             ViewBag.NombreRol = rol?.NombreRol;
 
@@ -160,11 +138,12 @@ namespace hotelapp_frontend.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Error al eliminar el usuario: " + ex.Message);
             }
+
+            return View();
         }
     }
-    
 }

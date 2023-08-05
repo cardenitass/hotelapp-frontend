@@ -4,25 +4,19 @@ CREATE DATABASE HotelApp_BD
 
 USE HotelApp_BD
 
+
 --------------------------------------------------------------
 ---------------- Creación de Tablas---------------------------
 --------------------------------------------------------------
-CREATE TABLE Tipo_Habitacion ( 
-IDTipoHabitacion INT IDENTITY (1,1) NOT NULL CONSTRAINT pk_tipo_habitacion PRIMARY KEY,
-NombreTipoHabitacion VARCHAR(30) NOT NULL ,
+CREATE TABLE Habitacion ( 
+IDHabitacion INT IDENTITY (1,1) NOT NULL CONSTRAINT pk_habitacion PRIMARY KEY,
+NombreHabitacion VARCHAR(30) NOT NULL,
+Descripcion VARCHAR(500) NOT NULL,
+Path_Img VARCHAR(MAX) NOT NULL,
 CantPersonas INT NOT NULL ,
 CantCamas INT NOT NULL ,
-Cocina BIT NOT NULL, 
+Disponible BIT NOT NULL DEFAULT 1,
 CostoNoche DECIMAL(12,2) NOT NULL);
-
-
-CREATE TABLE Habitacion (
-IDHabitacion INT IDENTITY (1,1) NOT NULL CONSTRAINT pk_product PRIMARY KEY,
-IDTipoHabitacion INT NOT NULL,
-NumeroPiso INT NOT NULL,
-Disponible BIT NOT NULL,
-Path_Img VARCHAR(50) NOT NULL,
-FOREIGN KEY (IDTipoHabitacion) REFERENCES Tipo_Habitacion);
 
 CREATE TABLE Roles ( 
 IDRol INT IDENTITY (1,1) NOT NULL CONSTRAINT pk_roles PRIMARY KEY,
@@ -34,7 +28,7 @@ Nombre VARCHAR(40) NOT NULL,
 FechaNacimiento DATE NOT NULL,
 Correo VARCHAR (50) NOT NULL,
 Contrasena VARCHAR(40) NOT NULL,
-Estado BIT NOT NULL,
+Estado BIT NOT NULL DEFAULT 1,
 IDRol INT NOT NULL,
 FOREIGN KEY (IDRol) REFERENCES Roles);
 
@@ -53,7 +47,7 @@ FOREIGN KEY (IDUsuario) REFERENCES Usuarios);
 -- Registrar errores en la app de usuarios logueados
 
 CREATE TABLE  Errores (
-	IDerror INT  NOT NULL CONSTRAINT pk_errores PRIMARY KEY,
+	IDerror INT IDENTITY (1,1) NOT NULL CONSTRAINT pk_errores PRIMARY KEY,
 	Descripcion VARCHAR(500) NOT NULL,
 	Fecha DATETIME NOT NULL,
 	Origen VARCHAR(100) NOT NULL,
@@ -63,7 +57,7 @@ CREATE TABLE  Errores (
 -- Registrar errores en la app cuando el usuario no esta logueado
 
 CREATE TABLE  Bitacora (
-	IDbitacora INT  NOT NULL CONSTRAINT pk_bitacora PRIMARY KEY,
+	IDbitacora INT IDENTITY (1,1) NOT NULL CONSTRAINT pk_bitacora PRIMARY KEY,
 	Descripcion VARCHAR(500) NOT NULL,
 	Fecha DATETIME NOT NULL,
 	Origen VARCHAR(100) NOT NULL);
@@ -73,17 +67,25 @@ CREATE TABLE  Bitacora (
 -----------------------Inserts--------------------------------
 --------------------------------------------------------------
 
-INSERT INTO TIPO_HABITACION VALUES (
-'Habitación Presidencial', 5, 5, 1000000)
+INSERT INTO Habitacion (NombreHabitacion, Path_Img, CantPersonas, CantCamas, Descripcion, CostoNoche)
+VALUES (
+    'Habitación Presidencial',
+    'https://colineal.com/cdn/shop/articles/estilos-decoracion-habitaciones-principales.jpg?v=1620156517',
+    5, -- CantPersonas
+    5, -- CantCamas
+    'Esta habitacion cuenta con balcon y cocina, ademas tiene la capacidad de recibir hasta 10 huespedes para organizar eventos',
+    1000000 -- CostoNoche
+);
 
-INSERT INTO Habitacion VALUES (1, 1, 'D')
 
-INSERT INTO Roles VALUES ('Empleado')
-INSERT INTO Roles VALUES ('Usuario')
+INSERT INTO Roles VALUES ('Administrator')
+INSERT INTO Roles VALUES ('Client')
 
-INSERT INTO Reservaciones VALUES (
-1, 1, 1, 2, '2023-09-14', '2023-09-16', 2000000)
+INSERT INTO Usuarios (Nombre, FechaNacimiento, Correo, Contrasena, IDRol)
+VALUES ('David Cárdenas Orozco', '2002-09-24', 'davidcardenasorozco@gmail.com', 'admin12345', 1);
 
-INSERT INTO Usuarios VALUES ('David Cárdenas Orozco', '2002-09-24', 'davidcardenasorozco@gmail.com', 'admin12345', 1)
+Select * from Habitacion
 
-GO
+Select * from Roles
+
+Select * from Usuarios

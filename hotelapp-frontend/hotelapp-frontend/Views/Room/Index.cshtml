@@ -1,48 +1,71 @@
 ﻿@model IEnumerable<hotelapp_frontend.Models.Habitacion>
 
 @{
-    ViewData["Title"] = "Lista de Usuarios";
+    ViewData["Title"] = "Rooms Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<br />
+<br />
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Room Maintenance</h3>
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="@Url.Action("Crear", "Room")" class="btn btn-success">Create</a>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Cost / Colones</th>
+                            <th>Capacity</th>
+                            <th>Available</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var habitacion in Model)
+                        {
+                            <tr>
+                                <td><img src="@habitacion.Path_Img" alt="" class="img-thumbnail" style="max-height: 100px;"></td>
+                                <td>@habitacion.NombreHabitacion</td>
+                                <td>@habitacion.CostoNoche</td>
+                                <td>Max person @habitacion.CantPersonas</td>
+                                <td>@(habitacion.Disponible ? "Yes" : "No")</td>
+                                <td>
+                                    <a href="@Url.Action("Detalle", "Room", new { id = habitacion.IDHabitacion })" class="btn btn-info">Details</a>
+                                    <a href="@Url.Action("Editar", "Room", new { id = habitacion.IDHabitacion })" class="btn btn-warning">Edit</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal_@habitacion.IDHabitacion">Delete</button>
 
-<h2>Lista de Habitaciones</h2>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal_@habitacion.IDHabitacion" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this room: @habitacion.NombreHabitacion?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="@Url.Action("Eliminar", "Room", new { id = habitacion.IDHabitacion })" class="btn btn-danger">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-@if (!Model.Any())
-{
-    <p>Sin habitaciones encontradas.</p>
-}
-else
-{
-    <section class="rooms-section spad">
-        <div class="container">
-            <div class="row">
-                @foreach (var habitacion in Model)
-                {
-                    <div class="col-lg-4 col-md-6">
-                        <div class="room-item">
-                            <div class="ri-text">
-                                <h4>@habitacion.IDTipoHabitacion</h4>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Número de Piso:</td>
-                                            <td>@habitacion.NumeroPiso</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Disponible:</td>
-                                            <td>@(habitacion.Disponible ? "Sí" : "No")</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="@Url.Action("Crear", "Room")" class="primary-btn">Crear</a>
-                                <a href="@Url.Action("Detalle", "Room", new { id = habitacion.IDHabitacion })" class="primary-btn">Detalles</a>
-                                <a href="@Url.Action("Editar", "Room", new { id = habitacion.IDHabitacion })" class="primary-btn">Editar</a>
-                                <a href="@Url.Action("Eliminar", "Room", new { id = habitacion.IDHabitacion })" class="primary-btn">Eliminar</a>
-                            </div>
-                        </div>
-                    </div>
-                }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
-}
+    </div>
+</section>

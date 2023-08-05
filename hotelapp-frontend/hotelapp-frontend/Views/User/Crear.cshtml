@@ -11,48 +11,42 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <h2>Crear Usuario</h2>
+                    <h2>Create a User</h2>
                     <div class="bt-option">
-                        <a asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
-                        <span>Crear Nuevo Usuario</span>
+                        <a asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                        <span>Create User</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
-                <form asp-action="Crear" method="post">
+                @using (Html.BeginForm("Crear", "User", FormMethod.Post))
+                {
                     <div class="ri-text">
                         <div class="form-group">
-                            <label asp-for="Nombre">Nombre:</label>
+                            <label asp-for="Nombre">Name:</label>
                             <input asp-for="Nombre" class="form-control" required>
                             <span asp-validation-for="Nombre" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="FechaNacimiento">Fecha de Nacimiento:</label>
-                            <input asp-for="FechaNacimiento" type="date" class="form-control" required>
-                            <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                            <label asp-for="FechaNacimiento">Birth Date:</label>
+                            <input asp-for="FechaNacimiento" class="form-control" type="date" max="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Correo">Correo:</label>
+                            <label asp-for="Correo">Email:</label>
                             <input asp-for="Correo" class="form-control" required>
                             <span asp-validation-for="Correo" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Contrasena">Contraseña:</label>
+                            <label asp-for="Contrasena">Password:</label>
                             <input asp-for="Contrasena" type="password" class="form-control" required>
                             <span asp-validation-for="Contrasena" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Estado" class="form-check-label">Estado:</label>
-                            <div class="form-check form-check-inline">
-                                <input asp-for="Estado" type="checkbox" class="form-check-input">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="IDRol">Rol:</label>
+                            <label asp-for="IDRol">Role:</label>
                             <select asp-for="IDRol" class="form-check form-check-inline" required>
-                                <option value="">Seleccione un Rol...</option>
+                                <option value="">Select a role...</option>
                                 @foreach (var rol in ViewBag.RolesList)
                                 {
                                     <option value="@rol.Value">@rol.Text</option>
@@ -60,9 +54,9 @@
                             </select>
                             <span asp-validation-for="IDRol" class="text-danger"></span>
                         </div>
-                        <button type="submit" class="create-btn">Crear</button>
+                        <button type="submit" class="create-btn">Create</button>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>
