@@ -121,7 +121,7 @@ namespace hotelapp_frontend.Controllers
         [HttpGet]
         public async Task<IActionResult> Reservar()
         {
-            return View();
+            return View(await _context.Habitacion.ToListAsync());
         }
 
     }

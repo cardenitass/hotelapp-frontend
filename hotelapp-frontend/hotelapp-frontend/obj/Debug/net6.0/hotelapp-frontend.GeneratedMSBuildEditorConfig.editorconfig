@@ -28,6 +28,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/David/Desktop/Github/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Reservation/Detalle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cRGV0YWxsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/David/Desktop/Github/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Reservation/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/David/Desktop/Github/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Room/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxDcmVhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,10 +50,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/David/Desktop/Github/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Room/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/David/Desktop/Github/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Room/Reservar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbVxSZXNlcnZhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/David/Desktop/Github/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Shared/Error.cshtml]
