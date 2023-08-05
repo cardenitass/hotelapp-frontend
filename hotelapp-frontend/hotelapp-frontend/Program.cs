@@ -1,4 +1,5 @@
 using hotelapp_frontend.Models;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<HotelAppContext>(opciones =>
         opciones.UseSqlServer(builder.Configuration.GetConnectionString("HotelAppContext")));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(120);  
+});
 
 
 
@@ -22,13 +29,14 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
+    name: "default",  
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

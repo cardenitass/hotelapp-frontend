@@ -4,7 +4,7 @@
 
 <style>
     .container-login {
-        background-image: url('https://cdn.wallpapersafari.com/36/30/IwygkQ.jpg'); /* Reemplaza 'ruta_de_la_imagen' por la ruta de tu imagen de fondo */
+        background-image: url('https://cdn.wallpapersafari.com/36/30/IwygkQ.jpg'); /* Replace 'image_path' with the path to your background image */
         background-size: cover;
         background-position: center;
         height: 100vh;
@@ -14,7 +14,7 @@
     }
 
     .overlay {
-        background-color: rgba(0, 0, 0, 0.5); /* Cambia el valor 0.5 según el nivel de opacidad deseado */
+        background-color: rgba(0, 0, 0, 0.5); /* Change the value 0.5 according to the desired opacity level */
         position: absolute;
         top: 0;
         bottom: 0;
@@ -26,16 +26,16 @@
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: rgba(0, 0, 0, 0.3); /* Cambia el valor 0.8 según el nivel de opacidad deseado */
-        color: white; /* Cambia el color del texto según tus preferencias */
-        padding: 20px; /* Agrega un espacio de 20px alrededor del contenido del card */
+        background-color: rgba(0, 0, 0, 0.3); /* Change the value 0.8 according to the desired opacity level */
+        color: white; /* Change text color according to your preference */
+        padding: 20px; /* Add a 20px space around the content of the card */
     }
 
         .card-login h3,
         .card-login label,
         .card-login a,
         .card-login p {
-            color: white; /* Cambia el color del texto a blanco */
+            color: white; /* Change text color to white */
         }
 </style>
 
@@ -46,23 +46,26 @@
             <div class="col-md-14">
                 <div class="card card-login border-0">
                     <div class="card-body">
-                        <h3 class="text-center mb-4">Inicio de Sesión Sona</h3>
-                        <form asp-controller="Home" asp-action="Index" method="post">
+                        <h3 class="text-center mb-4">Sona Login</h3>
+                        <form asp-controller="User" asp-action="Login" method="post">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                             <div class="form-group">
-                                <label for="email">Correo electrónico:</label>
-                                <input type="email" class="form-control" id="email" name="Email" placeholder="Ingrese su correo electrónico" required>
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="correo" placeholder="Enter your email" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Contraseña:</label>
-                                <input type="password" class="form-control" id="password" name="Password" placeholder="Ingrese su contraseña" required>
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" name="contrasena" placeholder="Enter your password" required>
                             </div>
-                            <button type="submit" class="btn btn-outline-secondary btn-block" value="Iniciar sesión">Iniciar sesión</button>
+                            <button type="submit" class="btn btn-outline-secondary btn-block" value="Login">Login</button>
                         </form>
                         <div class="text-center mt-3">
-                            <a href="#">¿Olvidó su contraseña?</a>
+                            <a href="#">Forgot your password?</a>
                         </div>
                         <div class="text-center mt-3">
-                            <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+                            <p>Don't have an account? <a href="#">Register</a></p>
                         </div>
                     </div>
                 </div>
@@ -70,3 +73,4 @@
         </div>
     </div>
 </body>
+

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
 
@@ -10,10 +11,12 @@ namespace hotelapp_frontend.Controllers
     public class UserController : Controller
     {
         private readonly HotelAppContext _context;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public UserController(HotelAppContext context)
+        public UserController(HotelAppContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
+            _contextAccessor = contextAccessor;
         }
 
         // Trabajar Metodos de Login
@@ -23,6 +26,37 @@ namespace hotelapp_frontend.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(string correo, string contrasena)
+        {
+           
+            if (string.IsNullOrEmpty(correo) || string.IsNullOrEmpty(contrasena))
+            {
+                ModelState.AddModelError(string.Empty, "Please enter your email and password.");
+                return View();
+            }
+       
+            var usuario = await _context.Usuarios.SingleOrDefaultAsync(u => u.Correo == correo);
+        
+            if (usuario == null)
+            {
+                ModelState.AddModelError(string.Empty, "The entered email is not registered.");
+                return View();
+            }
+
+            if (usuario.Contrasena != contrasena)
+            {
+                ModelState.AddModelError(string.Empty, "Incorrect password.");
+                return View();
+            }
+
+            _contextAccessor.HttpContext.Session.SetString("NombreUsuario", usuario.Nombre);
+            _contextAccessor.HttpContext.Session.SetInt32("RolUsuario", usuario.IDRol);
+
+            return RedirectToAction("Index", "Home");
+        }
+
 
         public async Task<IActionResult> Index()
         {

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor _contextAccessor;
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -40,7 +42,7 @@
             <i class="icon_close"></i>
         </div>
         <div class="header-configure-area">
-            <a href="#" class="bk-btn">Welcome,username!</a>
+            <a href="#" class="bk-btn">Welcome,@_contextAccessor.HttpContext.Session.GetString("NombreUsuario")!</a>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
@@ -52,6 +54,7 @@
                         <li><a asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
                     </ul>
                 </li>
+                <li><a asp-area="" asp-controller="Room" asp-action="Reservar">Reservations</a></li>
                 <li><a asp-area="" asp-controller="About" asp-action="Index">About Us</a></li>
                 <li><a asp-area="" asp-controller="About" asp-action="Contact">Contact</a></li>
             </ul>
@@ -116,6 +119,7 @@
                                             <li><a asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
                                         </ul>
                                     </li>
+                                    <li><a asp-area="" asp-controller="Room" asp-action="Reservar">Reservations</a></li>
                                     <li><a asp-area="" asp-controller="About" asp-action="Index">About Us</a></li>
                                     <li><a asp-area="" asp-controller="About" asp-action="Contact">Contact</a></li>
                                 </ul>
