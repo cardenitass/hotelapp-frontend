@@ -28,12 +28,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Duant/OneDrive/Documentos/GitHub/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Reservation/ConfirmacionReserva.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cQ29uZmlybWFjaW9uUmVzZXJ2YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Duant/OneDrive/Documentos/GitHub/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Reservation/Detalle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cRGV0YWxsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Duant/OneDrive/Documentos/GitHub/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Reservation/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Duant/OneDrive/Documentos/GitHub/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Reservation/ReservaHabitacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cUmVzZXJ2YUhhYml0YWNpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Duant/OneDrive/Documentos/GitHub/hotelapp-frontend/hotelapp-frontend/hotelapp-frontend/Views/Room/Crear.cshtml]

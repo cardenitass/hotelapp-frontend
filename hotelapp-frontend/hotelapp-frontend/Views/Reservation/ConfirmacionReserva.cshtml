@@ -1,0 +1,28 @@
+﻿@model hotelapp_frontend.Models.Reservacion
+
+@{
+    ViewData["Title"] = "Reservation Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="confirmation-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="confirmation-content">
+                    <h2>Reservation Confirmed</h2>
+                    <p>Your reservation details:</p>
+                    <ul>
+                        <li>Check-in Date: @Model.FechaInicio.ToShortDateString()</li>
+                        <li>Check-out Date: @Model.FechaFin.ToShortDateString()</li>
+                        <li>Total Nights: @Model.CantidadNoches</li>
+                        <li>Total Cost: ₡@Model.CostoTotal</li>
+                    </ul>
+                    <p>Thank you for choosing us for your stay. We look forward to having you as our guest!</p>
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Continue</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

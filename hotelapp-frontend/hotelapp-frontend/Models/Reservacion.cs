@@ -1,7 +1,10 @@
-﻿namespace hotelapp_frontend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace hotelapp_frontend.Models
 {
     public class Reservacion
     {
+        [Key]
         public int IDReservacion { get; set; }
         public int IDHabitacion { get; set; }
         public int IDUsuario { get; set; }

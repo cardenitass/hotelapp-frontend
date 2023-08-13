@@ -33,7 +33,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button class="btn btn-primary" onclick="location.href='@Url.Action("Detalle", "Reservation", new { id = habitacion.IDHabitacion })'">View</button>
+                            @if (habitacion.Disponible)
+                            {
+                                <button class="btn btn-primary" onclick="location.href='@Url.Action("Detalle", "Reservation", new { id = habitacion.IDHabitacion })'">View</button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -41,3 +44,4 @@
         </div>
     </div>
 </section>
+
