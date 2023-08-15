@@ -1,7 +1,14 @@
 ﻿@model hotelapp_frontend.Models.Usuario
 @{
     ViewData["Title"] = "Crear Usuario";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Context.Session.GetInt32("RolUsuario") != null && Context.Session.GetInt32("RolUsuario") == 1)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    }
 }
 
 <link rel="stylesheet" href="~/css/style.css" type="text/css" asp-append-version="true">
@@ -43,16 +50,26 @@
                             <input asp-for="Contrasena" type="password" class="form-control" required>
                             <span asp-validation-for="Contrasena" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
-                            <label asp-for="IDRol">Role:</label>
-                            <select asp-for="IDRol" class="form-check form-check-inline" required>
-                                <option value="">Select a role...</option>
-                                @foreach (var rol in ViewBag.RolesList)
-                                {
-                                    <option value="@rol.Value">@rol.Text</option>
-                                }
-                            </select>
+                           
+                            @if (Context.Session.GetInt32("RolUsuario") != null && Context.Session.GetInt32("RolUsuario") == 1)
+                            {
+                                <label asp-for="IDRol">Role:</label>
+                                <select asp-for="IDRol" class="form-check form-check-inline" required>
+                                    <option value="">Select a role...</option>
+                                    @foreach (var rol in ViewBag.RolesList)
+                                    {
+                                        <option value="@rol.Value">@rol.Text</option>
+                                    }
+                                </select>
+                            }
+                            else
+                            {
+                            <input type="hidden" asp-for="IDRol" value="2" />
+                            }
                             <span asp-validation-for="IDRol" class="text-danger"></span>
+
                         </div>
                         <button type="submit" class="create-btn">Create</button>
                     </div>
