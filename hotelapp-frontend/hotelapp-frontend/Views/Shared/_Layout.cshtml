@@ -42,19 +42,29 @@
             <i class="icon_close"></i>
         </div>
         <div class="header-configure-area">
-            <a href="#" class="bk-btn">Welcome,@_contextAccessor.HttpContext.Session.GetString("NombreUsuario")!</a>
+            @if (_contextAccessor.HttpContext.Session.GetString("NombreUsuario") != null)
+            {
+                <a href="#" class="bk-btn">Welcome @_contextAccessor.HttpContext.Session.GetString("NombreUsuario")!</a>
+            }
+            else
+            {
+                <a asp-area="" asp-controller="User" asp-action="Login">Iniciar sesión</a>
+            }
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
                 <li @*class="active"*@><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li>
-                    <a>Maintenance</a>
-                    <ul class="dropdown">
-                        <li><a asp-area="" asp-controller="Room" asp-action="Index">Rooms</a></li>
-                        <li><a asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
-                        <li><a asp-area="" asp-controller="ReservationAdmin" asp-action="ListaReservaciones">Reservations</a></li>
-                    </ul>
-                </li>
+                @if (_contextAccessor.HttpContext.Session.GetInt32("RolUsuario") != null && _contextAccessor.HttpContext.Session.GetInt32("RolUsuario") == 1)
+                {
+                    <li>
+                        <a>Maintenance</a>
+                        <ul class="dropdown">
+                            <li><a asp-area="" asp-controller="Room" asp-action="Index">Rooms</a></li>
+                            <li><a asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
+                            <li><a asp-area="" asp-controller="ReservationAdmin" asp-action="ListaReservaciones">Reservations</a></li>
+                        </ul>
+                    </li>
+                }
                 <li><a asp-area="" asp-controller="Reservation" asp-action="Index">Reservations</a></li>
                 <li><a asp-area="" asp-controller="About" asp-action="Index">About Us</a></li>
                 <li><a asp-area="" asp-controller="About" asp-action="Contact">Contact</a></li>
@@ -91,9 +101,16 @@
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
-                            <a href="#" class="bk-btn">Welcome username</a>
-                        </div>
+                                @if (_contextAccessor.HttpContext.Session.GetString("NombreUsuario") != null)
+                                {
+                                    <a href="@Url.Action("Editar", "User", new { id = Context.Session.GetInt32("IdUsuario") })" class="bk-btn">
+                                        Welcome @Context.Session.GetString("NombreUsuario")!
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-area="" asp-controller="User" asp-action="Login">Iniciar sesión</a>
+                                }
                     </div>
                 </div>
             </div>
@@ -103,7 +120,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.html">
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
                                 <img src="img/logo.png" alt="">
                             </a>
                         </div>
@@ -113,7 +130,10 @@
                             <nav class="mainmenu">
                                 <ul>
                                     <li @*class="active"*@><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li>
+                                   
+                                      @if (_contextAccessor.HttpContext.Session.GetInt32("RolUsuario") != null && _contextAccessor.HttpContext.Session.GetInt32("RolUsuario") == 1)
+                                      {
+                                     <li>
                                         <a>Maintenance</a>
                                         <ul class="dropdown">
                                             <li><a asp-area="" asp-controller="Room" asp-action="Index">Rooms</a></li>
@@ -121,13 +141,14 @@
                                             <li><a asp-area="" asp-controller="Reservation" asp-action="ListaReservaciones">Reservations</a></li>
                                         </ul>
                                     </li>
+                                    }
                                     <li><a asp-area="" asp-controller="Reservation" asp-action="Index">Reservations</a></li>
                                     <li><a asp-area="" asp-controller="About" asp-action="Index">About Us</a></li>
                                     <li><a asp-area="" asp-controller="About" asp-action="Contact">Contact</a></li>
                                 </ul>
                             </nav>
                             <div class="nav-right">
-                                <a href="#"><i class="fa fa-sign-out fa-4x"></i></a>
+                               <a href="~/User/SignOut"><i class="fa fa-sign-out fa-4x"></i></a>
                             </div>
                         </div>
                     </div>

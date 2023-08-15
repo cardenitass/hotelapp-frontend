@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    // Access the session variables
+    var httpContext = ViewContext.HttpContext;
+    string nombreUsuario = httpContext.Session.GetString("NombreUsuario");
+    int? rolUsuario = httpContext.Session.GetInt32("RolUsuario");
 }
 
 <!-- Hero Section Begin -->

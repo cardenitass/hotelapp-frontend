@@ -5,6 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using System.Net.Mail;
+using System.Net;
+using System.Text;
+using System.Configuration;
 
 namespace hotelapp_frontend.Controllers
 {
@@ -12,11 +17,13 @@ namespace hotelapp_frontend.Controllers
     {
         private readonly HotelAppContext _context;
         private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IConfiguration _configuration;
 
-        public UserController(HotelAppContext context, IHttpContextAccessor contextAccessor)
+        public UserController(HotelAppContext context, IHttpContextAccessor contextAccessor, IConfiguration configuration)
         {
             _context = context;
             _contextAccessor = contextAccessor;
+            _configuration = configuration;
         }
 
         // Trabajar Metodos de Login
@@ -53,10 +60,16 @@ namespace hotelapp_frontend.Controllers
 
             _contextAccessor.HttpContext.Session.SetString("NombreUsuario", usuario.Nombre);
             _contextAccessor.HttpContext.Session.SetInt32("RolUsuario", usuario.IDRol);
+            _contextAccessor.HttpContext.Session.SetInt32("IdUsuario", usuario.IDUsuario);
 
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult SignOut()
+        {
+            _contextAccessor.HttpContext.Session.Clear(); // Clear all session variables
+            return RedirectToAction("Index", "Home"); // Redirect to home page after sign-out
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -67,6 +80,11 @@ namespace hotelapp_frontend.Controllers
         [HttpGet]
         public IActionResult Crear()
         {
+            Usuario usuario = new Usuario
+            {
+                IDRol = 2 
+            };
+
             ViewBag.RolesList = new SelectList(_context.Roles, "IDRol", "NombreRol");
             return View();
         }
@@ -81,7 +99,18 @@ namespace hotelapp_frontend.Controllers
                     usuario.Estado = true;
                     _context.Usuarios.Add(usuario);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    int? loggedInUserRole = HttpContext.Session.GetInt32("RolUsuario");
+
+                    if (loggedInUserRole.HasValue && loggedInUserRole.Value == 1)
+                    {
+                        // Admin user, redirect to User/Index
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        // Regular user, redirect to home page
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
             }
             catch (Exception ex)
@@ -91,6 +120,80 @@ namespace hotelapp_frontend.Controllers
 
             ViewBag.RolesList = new SelectList(_context.Roles, "IDRol", "NombreRol");
             return View(usuario);
+        }
+
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotPassword(PasswordReset model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _context.Usuarios.SingleOrDefault(u => u.Correo == model.Email);
+                if (user != null)
+                {
+                    // Implement your logic here to generate a new password and update the user's password
+                    // For example:
+                    string newPassword = GenerateNewPassword();
+                    user.Contrasena = newPassword;
+                    _context.SaveChanges();
+
+                    SendPasswordResetEmail(user.Correo, newPassword);
+
+                    TempData["ResetPasswordSuccess"] = "Your password has been reset. Please check your email for the new password.";
+                    return RedirectToAction("Login");
+                }
+                TempData["ResetPasswordError"] = "The entered email is not registered.";
+                return RedirectToAction("ForgotPassword");
+            }
+
+            TempData["ResetPasswordError"] = "Please enter your email.";
+            return RedirectToAction("ForgotPassword");
+        }
+
+        private void SendPasswordResetEmail(string recipientEmail, string newPassword)
+        {
+            var emailSettings = _configuration.GetSection("EmailSettings");
+            var smtpClient = new SmtpClient
+            {
+                Host = emailSettings["SmtpServer"],
+                Port = int.Parse(emailSettings["Port"]),
+                Credentials = new NetworkCredential(emailSettings["Username"], emailSettings["Password"]),
+                EnableSsl = true
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(emailSettings["SenderEmail"], emailSettings["SenderName"]),
+                Subject = "Password Reset",
+                Body = $"Your new password: {newPassword}"
+            };
+
+            mailMessage.To.Add(recipientEmail);
+
+            smtpClient.Send(mailMessage);
+        }
+
+        private string GenerateNewPassword()
+        {
+            const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            int passwordLength = 10;
+
+            StringBuilder newPassword = new StringBuilder();
+            Random random = new Random();
+
+            for (int i = 0; i < passwordLength; i++)
+            {
+                int index = random.Next(validChars.Length);
+                newPassword.Append(validChars[index]);
+            }
+
+            return newPassword.ToString();
         }
 
         [HttpGet]
