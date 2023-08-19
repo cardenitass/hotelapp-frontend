@@ -17,5 +17,7 @@ namespace hotelapp_frontend.Models
 
         public bool Disponible { get; set; }
         public decimal CostoNoche { get; set; }
+
+        
     }
 }

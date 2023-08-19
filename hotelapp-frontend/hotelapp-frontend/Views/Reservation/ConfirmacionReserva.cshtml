@@ -1,4 +1,4 @@
-﻿@model hotelapp_frontend.Models.Reservacion
+﻿@model hotelapp_frontend.Models.Reservaciones
 
 @{
     ViewData["Title"] = "Reservation Confirmation";
@@ -13,10 +13,12 @@
                     <h2>Reservation Confirmed</h2>
                     <p>Your reservation details:</p>
                     <ul>
+                        <li>Habitacion: @Model.IDHabitacion</li>
+                        <li>Usuario: @Model.IDUsuario</li>
                         <li>Check-in Date: @Model.FechaInicio.ToShortDateString()</li>
                         <li>Check-out Date: @Model.FechaFin.ToShortDateString()</li>
                         <li>Total Nights: @Model.CantidadNoches</li>
-                        <li>Total Cost: ₡@Model.CostoTotal</li>
+                        <li>Total Cost: ₡@Model.Costo_Total</li>
                     </ul>
                     <p>Thank you for choosing us for your stay. We look forward to having you as our guest!</p>
                     <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Continue</a>

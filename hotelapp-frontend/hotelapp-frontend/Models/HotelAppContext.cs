@@ -16,7 +16,7 @@ namespace hotelapp_frontend.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Rol> Roles { get; set; }
 
-        public DbSet<Reservacion> Reservaciones { get; set; }
+        public DbSet<Reservaciones> Reservaciones { get; set; }
 
     }
 }

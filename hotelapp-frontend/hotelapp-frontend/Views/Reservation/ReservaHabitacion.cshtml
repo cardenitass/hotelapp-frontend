@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label for="CostoTotal">Total Cost:</label>
-                            <input type="text" class="form-control" id="CostoTotal" name="CostoTotal" readonly />
+                            <input type="text" class="form-control" id="Costo_Total" name="CostoTotal" readonly />
                         </div>
                         <h4>Payment Information:</h4>
                         <div class="form-group">
@@ -65,14 +65,10 @@
                                 <input type="password" class="form-control" id="CVV" name="CVV" required />
                             </div>
                         </div>
-                        <button class="btn btn-primary" onclick="redirectToConfirmacionReserva(@Model.IDHabitacion)">Reserve</button>
-
-                        <script>
-                            function redirectToConfirmacionReserva(idHabitacion) {
-                                var url = '@Url.Action("ConfirmacionReserva", "Reservation")?id=' + idHabitacion;
-                                window.location.href = url;
-                            }
-                        </script>
+                        @if (Model.Disponible)
+                        {
+                            <button class="btn btn-primary" onclick="location.href='@Url.Action("ConfirmacionReserva", "Reservation", new { id = Model.IDHabitacion })'">Reserve</button>
+                        }
                     </form>
                 </div>
             </div>
