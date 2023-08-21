@@ -84,8 +84,17 @@ INSERT INTO Roles VALUES ('Client')
 INSERT INTO Usuarios (Nombre, FechaNacimiento, Correo, Contrasena, IDRol)
 VALUES ('David Cárdenas Orozco', '2002-09-24', 'davidcardenasorozco@gmail.com', 'admin12345', 1);
 
+INSERT INTO Usuarios (Nombre, FechaNacimiento, Correo, Contrasena, IDRol)
+VALUES ('Edgar Herrera Varela', '2002-09-24', 'eherrera10234@ufide.ac.cr', 'admin12345', 1);
+
+INSERT INTO Usuarios (Nombre, FechaNacimiento, Correo, Contrasena, IDRol)
+VALUES ('Edgar Herrera Varela', '2002-09-24', 'edgarherrer100@gmail.com', 'admin12345', 1);
+
 Select * from Habitacion
 
 Select * from Roles
 
 Select * from Usuarios
+
+
+

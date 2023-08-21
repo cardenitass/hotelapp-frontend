@@ -112,10 +112,12 @@ namespace hotelapp_frontend.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Error al eliminar la habitacion: " + ex.Message);
             }
+
+            return View();
         }
 
         [HttpGet]
